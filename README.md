@@ -1,3 +1,3 @@
-custom language
+Custom language for simple and complex math.
 
-file reading not working yet
+Lexer, Parser, and Vistor working properly now.
