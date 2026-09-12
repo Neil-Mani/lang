@@ -1,3 +1,61 @@
-var name = "Neil Mani";
+# Alang feature tour
+# Run with: alang.exe examples/all_features.alang
 
-print(name);
+# User input: input() returns a string, input_number() returns a number.
+var name = input("What is your name? ");
+var age = input_number("How old are you? ");
+output("Hello, " + name);
+output("You are " + age + " years old.");
+
+# Variables, arithmetic, and comparisons.
+var first = 10;
+var second = 3;
+var total = first + second;
+var difference = first - second;
+var product = first * second;
+var quotient = first / second;
+output("total = " + total);
+output("difference = " + difference);
+output("product = " + product);
+output("quotient = " + quotient);
+output(first == second);
+output(first > second);
+output(first < second);
+output((first > second) && (second > 0));
+output((first == second) || (first > second));
+
+# If and else.
+if (age > 17) {
+    output("You are an adult.");
+} else {
+    output("You are a minor.");
+}
+
+# While loop and assignment.
+var count = 0;
+while (count < 3) {
+    output("while count = " + count);
+    count = count + 1;
+}
+
+# For loop with initialization, condition, increment, and a block body.
+for (var index = 0; index < 3; index = index + 1) {
+    output("for index = " + index);
+}
+
+# User-defined function, parameters, and return.
+fn add(left, right) {
+    return left + right;
+}
+
+var result = add(first, second);
+output("add(first, second) = " + result);
+
+# Arrays and indexed access.
+var numbers = [100, 200, 300];
+output("numbers[0] = " + numbers[0]);
+output("numbers[1] = " + numbers[1]);
+output("numbers[2] = " + numbers[2]);
+
+# Built-in output also accepts multiple arguments.
+output("Done:", name, age, numbers);

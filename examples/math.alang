@@ -1,0 +1,80 @@
+# Alang math builtins
+
+output("abs(0 - 7) = " + abs(0 - 7));
+output("sqrt(9) = " + sqrt(9));
+output("cbrt(27) = " + cbrt(27));
+output("pow(2, 8) = " + pow(2, 8));
+output("exp(1) = " + exp(1));
+output("ln(exp(1)) = " + ln(exp(1)));
+output("log(exp(1)) = " + log(exp(1)));
+output("log10(1000) = " + log10(1000));
+output("log2(256) = " + log2(256));
+output("floor(3.7) = " + floor(3.7));
+output("ceil(3.2) = " + ceil(3.2));
+output("round(3.6) = " + round(3.6));
+output("min(8, 3, 5) = " + min(8, 3, 5));
+output("max(8, 3, 5) = " + max(8, 3, 5));
+output("PI = " + PI);
+output("E = " + E);
+output("TAU = " + TAU);
+output("sin(rad(90)) = " + sin(rad(90)));
+output("cos(rad(180)) = " + cos(rad(180)));
+output("tan(rad(45)) = " + tan(rad(45)));
+output("asin(1) = " + asin(1));
+output("acos(0) = " + acos(0));
+output("atan(1) = " + atan(1));
+output("atan2(1, 1) = " + atan2(1, 1));
+output("deg(PI/2) = " + deg(3*PI / 2));
+
+var sample_values = [1, 2, 2, 3, 4];
+output("sum = " + sum(sample_values));
+output("product = " + product(sample_values));
+output("mean = " + mean(sample_values));
+output("median = " + median(sample_values));
+output("mode = " + mode(sample_values));
+output("variance = " + variance(sample_values));
+output("stddev = " + stddev(sample_values));
+
+var vector_a = vector(1, 0, 0);
+var vector_b = [0, 1, 0];
+var unit_vector = normalize([3, 4]);
+var cross_vector = cross(vector_a, vector_b);
+output("magnitude([3, 4]) = " + magnitude([3, 4]));
+output("normalize([3, 4])[0] = " + unit_vector[0]);
+output("normalize([3, 4])[1] = " + unit_vector[1]);
+output("dot(vector_a, vector_b) = " + dot(vector_a, vector_b));
+output("cross(vector_a, vector_b)[2] = " + cross_vector[2]);
+output("angle_between(vector_a, vector_b) = " + deg(angle_between(vector_a, vector_b)));
+
+fn square(x) {
+	return x * x;
+}
+
+output("derivative(square, 3) = " + derivative("square", 3));
+output("integral(square, 0, 1) = " + integral("square", 0, 1));
+output("limit(square, 2) = " + limit("square", 2));
+
+var cubic(x) = x ^ 3;
+output("derivative(cubic) = " + derivative(cubic));
+output("derivative(cubic, 2) = " + derivative(cubic, 2));
+output("integral(cubic) = " + integral(cubic));
+output("integral(cubic, 0, 1) = " + integral(cubic, 0, 1));
+output("root(64, 6) = " + root(64, 6));
+output("root(0 - 8, 3) = " + root(0 - 8, 3));
+
+var quadratic(x) = (x ^ 2) - 4;
+var quadratic_roots = solve(quadratic, 0 - 10, 10);
+output("quadratic roots =");
+output(quadratic_roots);
+
+var matrix_a = matrix([[1, 2], [3, 4]]);
+output("matrix =");
+output(matrix_a);
+output("det(matrix) = " + det(matrix_a));
+output("transpose(matrix) =");
+output(transpose(matrix_a));
+output("inverse(matrix) =");
+output(inverse(matrix_a));
+output("eigenvalues(matrix) =");
+output(eigenvalues(matrix_a));
+

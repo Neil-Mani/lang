@@ -1,0 +1,70 @@
+# Complex projectile-motion problem
+# A projectile is launched at 50 m/s. Find the launch angles that
+# hit a target 150 m away, then calculate the flight and trajectory data.
+
+var velocity = 50;
+var gravity = 9.81;
+var target_distance = 150;
+
+# Horizontal range as a function of launch angle in radians.
+var range_error(angle) = ((velocity ^ 2) * sin(2 * angle) / gravity) - target_distance;
+
+# Find all launch angles between near-horizontal and near-vertical.
+var launch_angles = solve(range_error, 0.01, (PI / 2) - 0.01, 2000);
+output("Launch angles in radians:");
+output(launch_angles);
+output("Launch angles in degrees:");
+output(deg(launch_angles[0]));
+output(deg(launch_angles[1]));
+
+# Use the lower-angle solution for the rest of the analysis.
+var launch_angle = launch_angles[0];
+var horizontal_velocity = velocity * cos(launch_angle);
+var vertical_velocity = velocity * sin(launch_angle);
+var flight_time = (2 * vertical_velocity) / gravity;
+var peak_height = (vertical_velocity ^ 2) / (2 * gravity);
+
+output("Selected launch angle in degrees:");
+output(deg(launch_angle));
+output("Flight time in seconds:");
+output(flight_time);
+output("Peak height in meters:");
+output(peak_height);
+
+# Position functions for the selected trajectory.
+var horizontal_position(time) = horizontal_velocity * time;
+var vertical_position(time) = (vertical_velocity * time) - ((gravity * (time ^ 2)) / 2);
+
+output("Horizontal position at impact:");
+output(horizontal_position(flight_time));
+output("Vertical position at impact:");
+output(vertical_position(flight_time));
+
+# Vector quantities and calculus checks.
+var launch_velocity_vector = vector(horizontal_velocity, vertical_velocity);
+var impact_velocity_vector = vector(horizontal_velocity, 0 - vertical_velocity);
+output("Launch velocity vector:");
+output(launch_velocity_vector);
+output("Impact velocity magnitude:");
+output(magnitude(impact_velocity_vector));
+output("Velocity dot product:");
+output(dot(launch_velocity_vector, impact_velocity_vector));
+output("Average height during flight:");
+output(integral("vertical_position", 0, flight_time) / flight_time);
+output("Range sensitivity per radian:");
+output(derivative("range_error", launch_angle));
+
+# Sample the trajectory and summarize it statistically.
+var heights = [
+    vertical_position(0),
+    vertical_position(flight_time / 4),
+    vertical_position(flight_time / 2),
+    vertical_position(3 * flight_time / 4),
+    vertical_position(flight_time)
+];
+output("Sampled trajectory heights:");
+output(heights);
+output("Mean sampled height:");
+output(mean(heights));
+output("Standard deviation of sampled heights:");
+output(stddev(heights));

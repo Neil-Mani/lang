@@ -1,0 +1,87 @@
+# Combined Alang problem: compare two projectile trajectories
+#
+# A launch system fires at 50 m/s. Find every launch angle that reaches
+# a target 150 m away, then use regular programming constructs to compare
+# the trajectories and choose the lower-angle solution.
+
+var launch_speed = 50;
+var gravity = 9.81;
+var target_distance = 150;
+
+# User-defined equations used by solve() and integral().
+var range_error(angle) = ((launch_speed ^ 2) * sin(2 * angle) / gravity) - target_distance;
+var flight_time(angle) = (2 * launch_speed * sin(angle)) / gravity;
+var height_at(time, angle) = (launch_speed * sin(angle) * time) - ((gravity * (time ^ 2)) / 2);
+
+# Math function: find both angles numerically.
+var solutions = solve(range_error, 0.01, (PI / 2) - 0.01, 2000);
+output("All valid launch angles in degrees:");
+output(deg(solutions[0]));
+output(deg(solutions[1]));
+
+# Regular programming: loop over every solution and calculate its data.
+var lower_angle = solutions[0];
+var best_peak = 0;
+var best_time = 0;
+var angle_index = 0;
+
+for (var i = 0; i < 2; i = i + 1) {
+    var angle = solutions[i];
+    var time = flight_time(angle);
+    var peak = (launch_speed * sin(angle)) ^ 2 / (2 * gravity);
+    var velocity = vector(launch_speed * cos(angle), launch_speed * sin(angle));
+
+    output("Trajectory angle in degrees:");
+    output(deg(angle));
+    output("Flight time:");
+    output(time);
+    output("Peak height:");
+    output(peak);
+    output("Launch velocity vector:");
+    output(velocity);
+
+    if (angle < PI / 4) {
+        output("Classification: low trajectory");
+        lower_angle = angle;
+        best_peak = peak;
+        best_time = time;
+        angle_index = i;
+    } else {
+        output("Classification: high trajectory");
+    }
+}
+
+# Regular programming: simulate the selected trajectory with a while loop.
+var sample_count = 0;
+var sample_time = 0;
+var sample_step = best_time / 4;
+var sampled_heights = [
+    height_at(0, lower_angle),
+    height_at(sample_step, lower_angle),
+    height_at(2 * sample_step, lower_angle),
+    height_at(3 * sample_step, lower_angle),
+    height_at(4 * sample_step, lower_angle)
+];
+
+while (sample_count < 5) {
+    output("Sample height:");
+    output(sampled_heights[sample_count]);
+    sample_count = sample_count + 1;
+    sample_time = sample_time + sample_step;
+}
+
+# More math builtins applied to the selected result.
+output("Selected trajectory index:");
+output(angle_index);
+output("Selected peak height:");
+output(best_peak);
+output("Mean sampled height:");
+output(mean(sampled_heights));
+output("Height standard deviation:");
+output(stddev(sampled_heights));
+
+var selected_height(time) = height_at(time, lower_angle);
+output("Area under the height curve:");
+output(integral("selected_height", 0, best_time));
+output("Range sensitivity at the selected angle:");
+output(derivative("range_error", lower_angle));
