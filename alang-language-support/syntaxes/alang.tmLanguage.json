@@ -1,0 +1,98 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Alang",
+    "scopeName": "source.alang",
+    "patterns": [
+        {"include": "#comments"},
+        {"include": "#strings"},
+        {"include": "#constants"},
+        {"include": "#keywords"},
+        {"include": "#builtins"},
+        {"include": "#numbers"},
+        {"include": "#functions"},
+        {"include": "#operators"},
+        {"include": "#punctuation"}
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.number-sign.alang",
+                    "match": "#.*$"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.double.alang",
+                    "begin": "\"",
+                    "end": "\"",
+                    "patterns": [
+                        {"name": "constant.character.escape.alang", "match": "\\\\."}
+                    ]
+                }
+            ]
+        },
+        "constants": {
+            "patterns": [
+                {
+                    "name": "constant.language.alang",
+                    "match": "\\b(?:PI|E|TAU)\\b"
+                }
+            ]
+        },
+        "keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.control.alang",
+                    "match": "\\b(?:if|else|while|for|return)\\b"
+                },
+                {
+                    "name": "storage.type.alang",
+                    "match": "\\b(?:var|fn)\\b"
+                }
+            ]
+        },
+        "builtins": {
+            "patterns": [
+                {
+                    "name": "support.function.alang",
+                    "match": "\\b(?:output|print|input|read|input_number|abs|sqrt|cbrt|pow|exp|ln|log|log10|log2|floor|ceil|round|min|max|sin|cos|tan|asin|acos|atan|atan2|rad|deg|sum|product|mean|median|mode|variance|stddev|vector|magnitude|normalize|dot|cross|angle_between|matrix|det|transpose|inverse|eigenvalues|derivative|integral|limit|root|solve)\\b"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "name": "constant.numeric.alang",
+                    "match": "\\b(?:[0-9]+(?:\\.[0-9]+)?|\\.[0-9]+)\\b"
+                }
+            ]
+        },
+        "functions": {
+            "patterns": [
+                {
+                    "name": "entity.name.function.alang",
+                    "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*\\()"
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.alang",
+                    "match": "(?:==|&&|\\|\\||[+*/^<>=-])"
+                }
+            ]
+        },
+        "punctuation": {
+            "patterns": [
+                {"name": "punctuation.definition.parameters.alang", "match": "[(),]"},
+                {"name": "punctuation.section.block.alang", "match": "[{}]"},
+                {"name": "punctuation.definition.array.alang", "match": "[\\[\\]]"},
+                {"name": "punctuation.terminator.statement.alang", "match": ";"}
+            ]
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "name": "alang-language-support",
+    "displayName": "Alang Language Support",
+    "description": "Syntax highlighting for the Alang math and physics language.",
+    "version": "0.0.1",
+    "publisher": "alang",
+    "engines": {
+        "vscode": ">=1.80.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "alang",
+                "aliases": ["Alang", "alang"],
+                "extensions": [".alang"],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "alang",
+                "scopeName": "source.alang",
+                "path": "./syntaxes/alang.tmLanguage.json"
+            }
+        ]
+    }
+}
